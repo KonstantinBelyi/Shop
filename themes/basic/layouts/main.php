@@ -23,8 +23,15 @@ LtIeAppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-</head><!--/head-->
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $('.accordion').dcAccordion({
+            speed:'fast'
+        });
+    });
+</script>
 
+</head><!--/head-->
 <body>
 <?php $this->beginBody() ?>
 
@@ -57,7 +64,7 @@ LtIeAppAsset::register($this);
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="#"><img src="/images/home/logo.png" alt="" /></a>
+                        <a href="#"><img src="../../../web/images/home/logo.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-8">

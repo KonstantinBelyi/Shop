@@ -4,14 +4,15 @@
 
 $this->title = 'Shop';
 ?>
+<ul class="accordion">
+<?= \app\components\MenuCategoryWidget::widget(['template' => 'menu'])?>
+</ul>
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
                     <h2>Каталог</h2>
-
-                    <?= \app\components\MenuCategoryWidget::widget(['template' => 'select'])?>
 
                     <div class="panel-group category-products">
 
