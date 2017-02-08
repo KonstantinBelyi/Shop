@@ -25,7 +25,7 @@ LtIeAppAsset::register($this);
     <?php $this->head() ?>
 <script type="text/javascript">
     $(document).ready(function($) {
-        $('.accordion').dcAccordion({
+        $('.catalog').dcAccordion({
             speed:'fast'
         });
     });
