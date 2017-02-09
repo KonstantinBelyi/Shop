@@ -68,4 +68,11 @@ class Product extends ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
+
+    public static function lastProducts($limit)
+    {
+        $products = Product::find()->orderBy('id DESC')->limit($limit)->all();
+
+        return $products;
+    }
 }
