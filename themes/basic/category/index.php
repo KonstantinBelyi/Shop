@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use \app\components\MenuCategoryWidget;
 
 $this->title = 'Shop';
 ?>
@@ -15,7 +16,7 @@ $this->title = 'Shop';
                     <h2>Категории</h2>
 
                     <ul class="catalog category-products">
-                        <?= \app\components\MenuCategoryWidget::widget(['template' => 'menu'])?>
+                        <?= MenuCategoryWidget::widget(['template' => 'menu'])?>
                     </ul>
 
                 </div>
@@ -23,28 +24,34 @@ $this->title = 'Shop';
 
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Последние товары</h2>
-                        <?php foreach ($lastProduct as $value):?>
+                    <h2 class="title text-center">Популярные товары</h2>
+
+                        <?php foreach ($hit as $value):?>
+
                             <div class="col-sm-4">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <?= Html::img("@web/images/products/{$value->img}", ['alt' => $value->name]) ?>
-                                    <h2>$<?= $value->price; ?></h2>
-                                    <p><?= $value->name; ?></p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+
+                                            <?= Html::img("@web/images/products/{$value->img}", ['alt' => $value->name]) ?>
+
+                                            <h2>$<?= $value->price; ?></h2>
+
+                                            <p><?= $value->name; ?></p>
+
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                        </div>
+
+                                        <?php if ($value->new):?>
+                                            <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new']) ?>
+                                        <?php endif;?>
+
+                                        <?php if ($value->sale):?>
+                                            <?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'new']) ?>
+                                        <?php endif;?>
+                                    </div>
                                 </div>
-
-                                <?php if ($value->new):?>
-                                    <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new']) ?>
-                                <?php endif;?>
-
-                                <?php if ($value->sale):?>
-                                    <?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'new']) ?>
-                                <?php endif;?>
                             </div>
-                        </div>
-                    </div>
                         <?php endforeach;?>
                 </div><!--features_items-->
 

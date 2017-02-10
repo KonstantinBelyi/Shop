@@ -14,12 +14,20 @@ use app\models\Product;
 
 class CategoryController extends AppController
 {
-    private $limitLastProducts = 6;
+    private $limit_popular_products = 6;
 
     public function actionIndex()
     {
-        $lastProduct = Product::lastProducts($this->limitLastProducts);
+        $hit = Product::popularProducts($this->limit_popular_products);
 
-        return $this->render('index', compact('lastProduct'));
+        return $this->render('index', compact('hit'));
+    }
+
+    public function actionView()
+    {
+        $id = Yii::$app->request->get('id');
+        $category_id = Product::findCategoryId($id);
+
+        return $this->render('view', compact('category_id'));
     }
 }
