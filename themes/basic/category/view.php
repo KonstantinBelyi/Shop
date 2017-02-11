@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use app\components\MenuCategoryWidget;
+use yii\widgets\LinkPager;
 ?>
 
 <section>
@@ -60,18 +61,19 @@ use app\components\MenuCategoryWidget;
 
                             <?php endforeach; ?>
 
+                            <div class="clearfix"></div>
+
+                            <?php
+                            echo LinkPager::widget([
+                            'pagination' => $pagination,
+                            ]);
+                            ?>
+
                         <?php else: ?>
 
                             <h3>Нет товара</h3>
 
                         <?php endif; ?>
-                    <div class="clearfix"></div>
-                    <ul class="pagination">
-                        <li class="active"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">&raquo;</a></li>
-                    </ul>
                 </div><!--features_items-->
 
             </div>

@@ -69,25 +69,4 @@ class Product extends ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
-    /**
-     * query DB, table 'product'
-     * return popular products
-     */
-    public static function popularProducts($limit)
-    {
-        $products = Product::find()->where(['hit' => '1'])->limit($limit)->all();
-
-        return $products;
-    }
-
-    /**
-     * query DB, table 'product'
-     * returns search results 'category_id'
-     */
-    public static function findCategoryId($id)
-    {
-        $products = Product::find()->where(['category_id' => $id])->all();
-
-        return $products;
-    }
 }

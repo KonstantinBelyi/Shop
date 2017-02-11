@@ -18,6 +18,7 @@ class MenuCategoryWidget extends Widget
     public $data;
     public $tree;
     public $menuHtml;
+    private $set_second_cache = 60;
 
     public function init()
     {
@@ -42,7 +43,7 @@ class MenuCategoryWidget extends Widget
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
         //set cache
-        Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        Yii::$app->cache->set('menu', $this->menuHtml, $this->set_second_cache);
 
         return $this->menuHtml;
     }
