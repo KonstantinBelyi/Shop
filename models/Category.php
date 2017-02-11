@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Codeception\Lib\Generator\Cept;
 use Yii;
 use \yii\db\ActiveRecord;
 
@@ -54,4 +55,25 @@ class Category extends ActiveRecord
     {
         return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
+
+    //===================================================================================
+    //возвращает категорию, конкатенирует поля с его родителем
+    public static function getConcatenationParentAndCategory($id)
+    {
+        $category = Category::findOne($id);
+
+        if (!$category->parent_id)
+            return $category;
+
+        $category_parent = Category::findOne($category->parent_id);
+
+        $fieldsCategory = [
+            'name' => $category->name . ' ' . $category_parent->name,
+            'keywords' => $category->keywords . ' ' . $category_parent->keywords,
+            'description' => $category->description . ' ' . $category_parent->description,
+        ];
+
+        return $fieldsCategory;
+    }
+    //===================================================================================
 }

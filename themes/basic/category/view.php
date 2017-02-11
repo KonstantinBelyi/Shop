@@ -4,8 +4,6 @@
 
 use yii\helpers\Html;
 use app\components\MenuCategoryWidget;
-
-$this->title = 'Shop';
 ?>
 
 <section>
@@ -24,11 +22,11 @@ $this->title = 'Shop';
 
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Последние товары</h2>
+                    <h2 class="title text-center"><?= $category->name; ?></h2>
 
-                        <?php if (!empty($category_id)): ?>
+                        <?php if (!empty($products)): ?>
 
-                            <?php /*$i = 0;*/ foreach ($category_id as $value): ?>
+                            <?php /*$i = 0;*/ foreach ($products as $value): ?>
 
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper">

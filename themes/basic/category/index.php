@@ -4,8 +4,6 @@
 
 use yii\helpers\Html;
 use \app\components\MenuCategoryWidget;
-
-$this->title = 'Shop';
 ?>
 
 <section>

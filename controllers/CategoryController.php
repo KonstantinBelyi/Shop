@@ -20,14 +20,23 @@ class CategoryController extends AppController
     {
         $hit = Product::popularProducts($this->limit_popular_products);
 
+        $this->setMeta("SHOP");
+
         return $this->render('index', compact('hit'));
     }
 
     public function actionView()
     {
         $id = Yii::$app->request->get('id');
-        $category_id = Product::findCategoryId($id);
+        $products = Product::findCategoryId($id);
+        $category = Category::getConcatenationParentAndCategory($id);
 
-        return $this->render('view', compact('category_id'));
+        if (is_array($category))
+            $category = (object)$category;
+
+        $this->setMeta('SHOP | ' . $category->name , $category->keywords, $category->description);
+
+
+        return $this->render('view', compact('products', 'category'));
     }
 }
