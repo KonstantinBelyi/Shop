@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use Codeception\Lib\Generator\Cept;
 use Yii;
-use \yii\db\ActiveRecord;
+use yii\db\ActiveRecord;
+
 
 /**
  * This is the model class for table "category".
@@ -61,6 +61,9 @@ class Category extends ActiveRecord
     public static function getConcatenationParentAndCategory($id)
     {
         $category = Category::findOne($id);
+
+        if (empty($category))
+            return null;
 
         if (!$category->parent_id)
             return $category;

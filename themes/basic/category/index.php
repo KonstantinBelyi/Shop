@@ -38,7 +38,7 @@ use \app\components\MenuCategoryWidget;
 
                                             <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                            <a href="<?= Url::to(['cart/add', 'id' => $value->id])?>" data-id = "<?= $value->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                                         </div>
 
                                         <?php if ($value->new):?>

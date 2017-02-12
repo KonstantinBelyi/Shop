@@ -12,6 +12,7 @@ use Yii;
 use app\models\Category;
 use app\models\Product;
 use yii\data\Pagination;
+use yii\web\HttpException;
 
 class CategoryController extends AppController
 {
@@ -45,6 +46,12 @@ class CategoryController extends AppController
     {
         $id = Yii::$app->request->get('id');
 
+        //$category = Category::findOne($id);
+        $category = Category::getConcatenationParentAndCategory($id);
+
+        if (empty($category))
+            throw new HttpException(404, 'Категория не найдена!');
+
         $query = Product::find()
             ->where(['category_id' => $id,]);
 
@@ -59,9 +66,6 @@ class CategoryController extends AppController
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-
-        //$category = Category::findOne($id);
-        $category = Category::getConcatenationParentAndCategory($id);
 
         if (is_array($category))
             $category = (object)$category;

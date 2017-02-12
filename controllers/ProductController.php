@@ -11,6 +11,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Category;
 use app\models\Product;
+use yii\web\HttpException;
 
 class ProductController extends AppController
 {
@@ -19,6 +20,9 @@ class ProductController extends AppController
         $id = Yii::$app->request->get('id');
 
         $product = Product::findOne($id);
+
+        if (empty($product))
+            throw new HttpException(404, 'Товар не найден!');
 
         $this->setMeta('SHOP | ' . $product->name, $product->keywords, $product->description);
 

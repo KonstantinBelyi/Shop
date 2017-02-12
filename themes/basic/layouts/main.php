@@ -24,14 +24,6 @@ LtIeAppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-<script type="text/javascript">
-    $(document).ready(function($) {
-        $('.catalog').dcAccordion({
-            speed:'fast'
-        });
-    });
-</script>
-
 </head><!--/head-->
 <body>
 <?php $this->beginBody() ?>
