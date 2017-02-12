@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use \app\components\MenuCategoryWidget;
 ?>
 
@@ -24,7 +25,7 @@ use \app\components\MenuCategoryWidget;
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Популярные товары</h2>
 
-                        <?php foreach ($hit as $value):?>
+                        <?php $i = 0; foreach ($hit as $value):?>
 
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
@@ -35,7 +36,7 @@ use \app\components\MenuCategoryWidget;
 
                                             <h2>$<?= $value->price; ?></h2>
 
-                                            <p><?= $value->name; ?></p>
+                                            <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
                                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                                         </div>
@@ -50,6 +51,12 @@ use \app\components\MenuCategoryWidget;
                                     </div>
                                 </div>
                             </div>
+
+                            <?php $i++;?>
+                            <?php if ($i % 3 == 0): ?>
+                               <div class="clearfix"></div>
+                            <?php endif; ?>
+
                         <?php endforeach;?>
                 </div><!--features_items-->
 
@@ -58,84 +65,48 @@ use \app\components\MenuCategoryWidget;
 
                     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="../../../web/images/home/recommend1.jpg" alt="" />
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
-                                            </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="../../../web/images/home/recommend2.jpg" alt="" />
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="../../../web/images/home/recommend3.jpg" alt="" />
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="../../../web/images/home/recommend1.jpg" alt="" />
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="../../../web/images/home/recommend2.jpg" alt="" />
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="../../../web/images/home/recommend3.jpg" alt="" />
-                                                <h2>$56</h2>
-                                                <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
-                                            </div>
+                            <?php
+                                $count = count($recommend);
+                                $i = 0;
+                                foreach ($recommend as $value): ?>
 
+                                <?php if ($i % 3 == 0): ?>
+                                    <div class="item <?php if ($i == 0) echo 'active' ?>">
+                                <?php endif; ?>
+
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+
+                                                        <?= Html::img("@web/images/products/{$value->img}", ['alt' => $value->name]) ?>
+
+                                                        <h2>$<?= $value->price; ?></h2>
+
+                                                        <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
+
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                                    </div>
+
+                                                    <?php if ($value->new):?>
+                                                        <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new']) ?>
+                                                    <?php endif;?>
+
+                                                    <?php if ($value->sale):?>
+                                                        <?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'new']) ?>
+                                                    <?php endif;?>
+
+                                                </div>
+                                            </div>
                                         </div>
+
+                                <?php $i++; if ($i % 3 == 0 || $i == $count): ?>
                                     </div>
-                                </div>
-                            </div>
+                                <?php endif; ?>
+
+                            <?php endforeach; ?>
+
                         </div>
                         <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
                             <i class="fa fa-angle-left"></i>

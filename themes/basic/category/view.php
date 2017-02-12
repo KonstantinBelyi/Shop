@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\components\MenuCategoryWidget;
 use yii\widgets\LinkPager;
 ?>
@@ -37,7 +38,7 @@ use yii\widgets\LinkPager;
 
                                                 <h2>$<?= $value->price; ?></h2>
 
-                                                <p><?= $value->name; ?></p>
+                                                <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
                                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                                             </div>

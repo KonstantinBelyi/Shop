@@ -16,20 +16,27 @@ use yii\data\Pagination;
 class CategoryController extends AppController
 {
     private $limit_popular_products = 6;
-    private $page_size = 3;
+    private $limit_recommend_products = 6;
+    private $pagination_page_size = 3;
 
     //============================================================
 
     public function actionIndex()
     {
         $hit = Product::find()
-            ->where(['hit' => '1'])
+            ->where(['hit' => '1',])
             ->limit($this->limit_popular_products)
             ->all();
 
+        $recommend = Product::find()
+            ->where(['recommend' => '1',])
+            ->limit($this->limit_recommend_products)
+            ->all();
+
+
         $this->setMeta("SHOP");
 
-        return $this->render('index', compact('hit'));
+        return $this->render('index', compact('hit', 'recommend'));
     }
 
     //============================================================
@@ -39,10 +46,10 @@ class CategoryController extends AppController
         $id = Yii::$app->request->get('id');
 
         $query = Product::find()
-            ->where(['category_id' => $id]);
+            ->where(['category_id' => $id,]);
 
         $pagination = new Pagination([
-            'defaultPageSize' => $this->page_size,
+            'defaultPageSize' => $this->pagination_page_size,
             'totalCount' => $query->count(),
             'forcePageParam' => false,
             'pageSizeParam' => false,
