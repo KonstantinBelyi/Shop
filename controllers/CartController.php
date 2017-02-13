@@ -21,5 +21,23 @@ class CartController extends AppController
 
         $cart = new Cart();
         $cart->addToCart($product);
+
+        $this->layout = false;
+
+        return $this->render('cart', compact('session'));
+    }
+
+    public function actionClear()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+
+        $session->remove('cart');
+        $session->remove('cart.qty');
+        $session->remove('cart.sum');
+
+        $this->layout = false;
+
+        return $this->render('cart', compact('session'));
     }
 }
