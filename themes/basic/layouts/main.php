@@ -64,7 +64,7 @@ LtIeAppAsset::register($this);
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+                            <li><a href="#" onclick="return getCart()" ><i class="fa fa-shopping-cart"></i> Корзина</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> Аккаунт</a></li>
                             <li><a href="#"><i class="fa fa-lock"></i> Вход</a></li>
                         </ul>
@@ -125,7 +125,7 @@ LtIeAppAsset::register($this);
         'header' => '<h2>Моя корзина</h2>',
         'id' => 'cart',
         'size' => 'modal-lg',
-        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Добавить</button>
+        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить</button>
             <button type="button" class="btn btn-success">Оформить заказ</button>
             <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить карзину</button>',
     ]);

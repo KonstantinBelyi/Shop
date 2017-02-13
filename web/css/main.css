@@ -1243,6 +1243,10 @@ h2.title {
 	left:0
 }
 
+.del-item{
+  cursor: pointer;
+}
+
 .product-information h2 {
   color: #363432;
   font-family: 'Roboto', sans-serif;
