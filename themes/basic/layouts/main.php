@@ -77,7 +77,7 @@ LtIeAppAsset::register($this);
     <div class="header-bottom"><!--header-bottom-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-9">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -99,6 +99,13 @@ LtIeAppAsset::register($this);
                             <li><a href="#">О магазине</a></li>
                             <li><a href="#">Контакты</a></li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="search_box pull-right">
+                        <form method="get" action="<?= Url::to(['category/search'])?>">
+                            <input type="text" placeholder="Search" name="search">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -126,7 +133,7 @@ LtIeAppAsset::register($this);
         'id' => 'cart',
         'size' => 'modal-lg',
         'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить</button>
-            <button type="button" class="btn btn-success">Оформить заказ</button>
+            <a href="' . Url::to(['cart/view']) . '" class="btn btn-success">Оформить заказ</a>
             <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить карзину</button>',
     ]);
 

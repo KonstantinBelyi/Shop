@@ -8,9 +8,10 @@ use app\models\Cart;
 
 class CartController extends AppController
 {
-    public function actionAdd()
+    public function actionAdd($id)
     {
-        $id = Yii::$app->request->get('id');
+        $qty = (int)Yii::$app->request->get('qty');
+        $qty = !$qty ? 1 : $qty;
 
         $product = Product::findOne($id);
         if (empty($product))
@@ -20,12 +21,17 @@ class CartController extends AppController
         $session->open();
 
         $cart = new Cart();
-        $cart->addToCart($product);
+        $cart->addToCart($product, $qty);
+
+        if (!$id = Yii::$app->request->isAjax)
+            return $this->redirect(Yii::$app->request->referrer);
 
         $this->layout = false;
 
         return $this->render('cart', compact('session'));
     }
+
+    //============================================================
 
     public function actionClear()
     {
@@ -41,10 +47,10 @@ class CartController extends AppController
         return $this->render('cart', compact('session'));
     }
 
-    public function actionDelItem()
-    {
-        $id = Yii::$app->request->get('id');
+    //============================================================
 
+    public function actionDelItem($id)
+    {
         $session = Yii::$app->session;
         $session->open();
 
@@ -56,6 +62,8 @@ class CartController extends AppController
         return $this->render('cart', compact('session'));
     }
 
+    //============================================================
+
     public function actionShow()
     {
         $session = Yii::$app->session;
@@ -64,5 +72,12 @@ class CartController extends AppController
         $this->layout = false;
 
         return $this->render('cart', compact('session'));
+    }
+
+    //============================================================
+
+    public function actionView()
+    {
+        return $this->render('view');
     }
 }

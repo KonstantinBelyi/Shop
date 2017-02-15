@@ -1,6 +1,9 @@
 <?php
 
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $category app\controllers\CategoryController
+ * @var $pagination app\controllers\CategoryController
+ */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -40,7 +43,7 @@ use yii\widgets\LinkPager;
 
                                                 <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                                <a href="#" data-id = "<?= $value->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                                             </div>
 
                                             <?php if ($value->new):?>

@@ -42,10 +42,8 @@ class CategoryController extends AppController
 
     //============================================================
 
-    public function actionView()
+    public function actionView($id)
     {
-        $id = Yii::$app->request->get('id');
-
         //$category = Category::findOne($id);
         $category = Category::getConcatenationParentAndCategory($id);
 
@@ -77,4 +75,31 @@ class CategoryController extends AppController
     }
 
     //============================================================
+
+    public function actionSearch()
+    {
+        $quest = trim(Yii::$app->request->get('search'));
+
+        $this->setMeta('SHOP | Поиск: ' . $quest);
+
+        if (!$quest)
+            return $this->render('search', compact('q'));
+
+        $query = Product::find()
+            ->where(['like', 'name', $quest]);
+
+        $pagination = new Pagination([
+            'defaultPageSize' => $this->pagination_page_size,
+            'totalCount' => $query->count(),
+            'forcePageParam' => false,
+            'pageSizeParam' => false,
+        ]);
+
+        $products = $query
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('search', compact('products', 'pagination', 'quest'));
+    }
 }

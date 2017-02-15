@@ -1,8 +1,12 @@
 <?php
 
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $product app\controllers\ProductController
+ * @var $pagination app\controllers\CategoryController
+ */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\components\MenuCategoryWidget;
 ?>
 
@@ -24,19 +28,12 @@ use app\components\MenuCategoryWidget;
                 <div class="product-details"><!--product-details-->
                     <div class="row">
                         <div class="col-sm-5">
+
                             <div class="view-product">
 
                                 <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]) ?>
 
                             </div>
-
-                            <?php if ($product->new):?>
-                                <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new']) ?>
-                            <?php endif;?>
-
-                            <?php if ($product->sale):?>
-                                <?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'new']) ?>
-                            <?php endif;?>
 
                         </div>
                         <div class="col-sm-7">
@@ -46,12 +43,13 @@ use app\components\MenuCategoryWidget;
                                 <p>Код товара: 1089772</p>
                                 <span>
                                     <span>$<?= $product->price; ?></span>
-                                    <label>Количество:</label>
-                                    <input type="text" value="1" />
-                                    <button type="button" class="btn btn-fefault cart">
+                                    <label for="qty">Количество:</label>
+                                    <input type="text" value="1" id="qty" />
+                                    <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>" data-id = "<?= $product->id; ?>"
+                                       class="btn btn-fefault add-to-cart cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         В корзину
-                                    </button>
+                                    </a>
                                 </span>
                                 <p><b>Наличие:</b>
                                     <?php
