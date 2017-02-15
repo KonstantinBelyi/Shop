@@ -17,6 +17,11 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
+
+    public static $limit_popular_products = 6;
+    public static $limit_recommend_products = 6;
+    public static $pagination_page_size = 3;
+
     /**
      * @inheritdoc
      */

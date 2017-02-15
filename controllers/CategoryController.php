@@ -26,12 +26,12 @@ class CategoryController extends AppController
     {
         $hit = Product::find()
             ->where(['hit' => '1',])
-            ->limit($this->limit_popular_products)
+            ->limit(Category::$limit_popular_products)
             ->all();
 
         $recommend = Product::find()
             ->where(['recommend' => '1',])
-            ->limit($this->limit_recommend_products)
+            ->limit(Category::$limit_recommend_products)
             ->all();
 
 
@@ -54,7 +54,7 @@ class CategoryController extends AppController
             ->where(['category_id' => $id,]);
 
         $pagination = new Pagination([
-            'defaultPageSize' => $this->pagination_page_size,
+            'defaultPageSize' => Category::$pagination_page_size,
             'totalCount' => $query->count(),
             'forcePageParam' => false,
             'pageSizeParam' => false,
@@ -89,7 +89,7 @@ class CategoryController extends AppController
             ->where(['like', 'name', $quest]);
 
         $pagination = new Pagination([
-            'defaultPageSize' => $this->pagination_page_size,
+            'defaultPageSize' => Category::$pagination_page_size,
             'totalCount' => $query->count(),
             'forcePageParam' => false,
             'pageSizeParam' => false,
