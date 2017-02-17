@@ -16,12 +16,6 @@ use yii\web\HttpException;
 
 class CategoryController extends AppController
 {
-    private $limit_popular_products = 6;
-    private $limit_recommend_products = 6;
-    private $pagination_page_size = 3;
-
-    //============================================================
-
     public function actionIndex()
     {
         $hit = Product::find()
