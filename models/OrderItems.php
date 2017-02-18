@@ -60,9 +60,9 @@ class OrderItems extends ActiveRecord
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
-    public static function saveOrder($items, $order_id)
+    public static function saveOrder($session_cart, $order_id)
     {
-        foreach ($items as $id => $item)
+        foreach ($session_cart as $id => $item)
         {
             $order_items = new OrderItems();
             $order_items->order_id = $order_id;
