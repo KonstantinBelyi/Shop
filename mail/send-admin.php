@@ -1,3 +1,9 @@
+<?php
+
+/* @var $session app\controllers\CartController */
+
+?>
+
 <div class="table-responsive">
     <table style="width: 100%; border: 1px solid #DDDDDD; border-collapse: collapse;">
         <thead>

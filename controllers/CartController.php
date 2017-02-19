@@ -40,9 +40,7 @@ class CartController extends AppController
         $session = Yii::$app->session;
         $session->open();
 
-        $session->remove('cart');
-        $session->remove('cart.qty');
-        $session->remove('cart.sum');
+        $this->delSession($session);
 
         $this->layout = false;
 
@@ -98,16 +96,13 @@ class CartController extends AppController
 
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят.');
 
-                Yii::$app->mailer
-                    ->compose('order', compact('session'))
-                    ->setFrom(['kbelyi@list.ru' => 'E-Shop.com'])
-                    ->setTo($model_order->email)
-                    ->setSubject('Заказ')
-                    ->send();
+                $this->sendMail('send-user', $session, $model_order->email, $model_order->id);
 
-                $session->remove('cart');
-                $session->remove('cart.qty');
-                $session->remove('cart.sum');
+                $email_admin = Yii::$app->params['adminEmail'];
+
+                $this->sendMail('send-admin', $session, $email_admin, $model_order->id);
+
+                $this->delSession($session);
 
                 return $this->refresh();
             }

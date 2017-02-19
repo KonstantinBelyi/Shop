@@ -40,6 +40,7 @@ class Orders extends ActiveRecord
     {
         return [
             [['name', 'email', 'phone', 'address'], 'required'],
+            [['email'], 'email'],
             [['created_at', 'updated_at'], 'safe'],
             [['qty'], 'integer'],
             [['sum'], 'number'],

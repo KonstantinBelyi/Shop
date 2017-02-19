@@ -8,5 +8,6 @@ return [
         'category/<id:\d+>' => 'category/view',
         'product/<id:\d+>' => 'product/view',
         'search' => 'category/search',
+        'order' => 'cart/order',
     ],
 ];

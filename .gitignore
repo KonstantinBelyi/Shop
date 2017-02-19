@@ -1,6 +1,8 @@
 # phpstorm project files
 .idea
 
+config/
+
 # netbeans project files
 nbproject
 

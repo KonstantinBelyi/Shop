@@ -42,7 +42,7 @@ $config = [
 
         'urlManager' => require (__DIR__ . '/urlManager.php'),
 
-        'view' => require (__DIR__ . '/theme.php'),
+        //'view' => require (__DIR__ . '/theme.php'),
     ],
 ];
 
