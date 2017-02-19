@@ -21,6 +21,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            //'loginUrl' => 'cart',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -44,6 +45,14 @@ $config = [
 
         //'view' => require (__DIR__ . '/theme.php'),
     ],
+
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+            'layout' => 'main_admin',
+        ],
+    ],
+
 ];
 
 if (YII_ENV_DEV) {
