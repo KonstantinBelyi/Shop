@@ -10,6 +10,7 @@ use app\models\OrderItems;
 
 class CartController extends AppController
 {
+    //добавление товара в корзину
     public function actionAdd($id)
     {
         $qty = (int)Yii::$app->request->get('qty');
@@ -34,7 +35,7 @@ class CartController extends AppController
     }
 
     //============================================================
-
+    //очистка корзины
     public function actionClear()
     {
         $session = Yii::$app->session;
@@ -48,7 +49,7 @@ class CartController extends AppController
     }
 
     //============================================================
-
+    //пересчет корзины
     public function actionDelItem($id)
     {
         $session = Yii::$app->session;
@@ -75,7 +76,7 @@ class CartController extends AppController
     }
 
     //============================================================
-
+    //оформление заказа
     public function actionOrder()
     {
         $session = Yii::$app->session;
@@ -92,15 +93,15 @@ class CartController extends AppController
 
             if ($model_order->save())
             {
-                OrderItems::saveOrder($session['cart'], $model_order->id);
+                $email_admin = Yii::$app->params['adminEmail'];
+
+                OrderItems::saveOrderItems($session['cart'], $model_order->id);
 
                 Yii::$app->session->setFlash('success', 'Ваш заказ принят.');
 
-                $this->sendMail('send-user', $session, $model_order->email, $model_order->id);
+                $model_order->sendMail('send-user', $session, $model_order->email);
 
-                $email_admin = Yii::$app->params['adminEmail'];
-
-                $this->sendMail('send-admin', $session, $email_admin, $model_order->id);
+                $model_order->sendMail('send-admin', $session, $email_admin);
 
                 $this->delSession($session);
 

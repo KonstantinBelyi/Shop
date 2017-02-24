@@ -38,16 +38,4 @@ class AppController extends Controller
         unset($session['cart.qty']);
         unset($session['cart.sum']);
     }
-
-    protected function sendMail( $view, $session, $email_to, $model_order_id)
-    {
-        $site_email = Yii::$app->components['mailer']['transport']['username'];
-
-        Yii::$app->mailer
-            ->compose($view, ['session' => $session])
-            ->setFrom([$site_email => 'E-Shop.com'])
-            ->setTo($email_to)
-            ->setSubject('Заказ ' . '№' . $model_order_id)
-            ->send();
-    }
 }

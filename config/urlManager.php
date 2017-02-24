@@ -9,5 +9,8 @@ return [
         'product/<id:\d+>' => 'product/view',
         'search' => 'category/search',
         'order' => 'cart/order',
+        'signup' => 'site/signup',
+        'signin' => 'site/login',
+        'logout' => 'site/logout',
     ],
 ];

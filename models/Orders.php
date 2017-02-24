@@ -84,4 +84,15 @@ class Orders extends ActiveRecord
     {
         return $this->hasMany(OrderItems::className(), ['order_id' => 'id']);
     }
+
+    //отправка заказа на почту
+    public function sendMail( $view, $session, $email_to)
+    {
+        Yii::$app->mailer
+            ->compose($view, ['session' => $session])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->params['nameSite'] . ' робот'])
+            ->setTo($email_to)
+            ->setSubject('Заказ №' . $this->id)
+            ->send();
+    }
 }

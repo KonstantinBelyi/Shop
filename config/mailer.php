@@ -12,7 +12,7 @@ return [
         'class' => 'Swift_SmtpTransport',
         'host' => 'smtp.mail.ru',
         'username' => 'kbelyi@list.ru',
-        'password' => '',
+        'password' => 'Rjcnz123',
         'port' => '465',
         'encryption' => 'ssl',
     ],

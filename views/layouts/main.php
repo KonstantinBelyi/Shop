@@ -65,8 +65,17 @@ LtIeAppAsset::register($this);
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="#" onclick="return getCart()" ><i class="fa fa-shopping-cart"></i> Корзина</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Аккаунт</a></li>
-                            <li><a href="#"><i class="fa fa-lock"></i> Вход</a></li>
+
+                            <?php if (Yii::$app->user->isGuest): ?>
+
+                                <li><a href="<?= Url::to(['site/signup'])?>"><i class="fa fa-user"></i> Регистрация</a></li>
+                                <li><a href="<?= Url::to(['site/login'])?>"><i class="fa fa-lock"></i> Вход</a></li>
+
+                            <?php else: ?>
+
+                                <li><a href="<?= Url::to(['site/logout'])?>"><i class="fa fa-lock"></i> Выход (<?= Yii::$app->user->identity['username']?>)</a></li>
+
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>
