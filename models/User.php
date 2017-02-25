@@ -15,7 +15,7 @@ use yii\db\Expression;
  * @property string $username
  * @property string $email
  * @property string $password_hash
- * @property string $password_reset_token
+ * @property string $password_secret_key
  * @property string $auth_key
  * @property string $status
  * @property string $created_at
@@ -99,43 +99,40 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
-    //==============================ResetPassword========================================================
+        //==============================ResetPassword & AccountActivation========================================================
 
-    //проверяет, если токен сброса пароля действителен
-    public static function isPasswordResetTokenValid($token)
+    //проверяет, если секретный ключ действителен
+    public static function isSecretKeyValid($key)
     {
-        if (empty($token))
+        if (empty($key))
         {
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        $timestamp = (int) substr($key, strrpos($key, '_') + 1);
+        $expire = Yii::$app->params['user.SecretKeyExpire'];
         return $timestamp + $expire >= time();
     }
 
-    //создает новый токен сброса пароля
-    public function generatePasswordResetToken()
+    //создает новый секретный ключ
+    public function generateSecretKey()
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+        $this->password_secret_key = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-    //находит пользователя с помощью токена сброса пароля
-    public static function findByPasswordResetToken($token)
+    //находит пользователя с помощью секретного ключа
+    public static function findBySecretKey($key)
     {
-        if (!static::isPasswordResetTokenValid($token)) {
+        if (!static::isSecretKeyValid($key)) {
             return null;
         }
 
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
+        return static::findOne(['password_secret_key' => $key]);
     }
 
-    //удаляет токен сброса пароля
-    public function removePasswordResetToken()
+    //удаляет секретный ключ
+    public function removeSecretKey()
     {
-        $this->password_reset_token = null;
+        $this->password_secret_key = null;
     }
 }

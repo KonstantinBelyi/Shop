@@ -2,7 +2,8 @@
 
 return [
     'adminEmail' => 'Kbelyi@ukr.net',
-    'supportEmail' => 'kbelyi@list.ru',
+    'supportEmail' => 'kbelyi@list.ru',         //отправка почты с этого email
     'nameSite' => 'E-Shop.com',
-    'user.passwordResetTokenExpire' => 3600,
+    'user.SecretKeyExpire' => 3600,             //время хранения секретного ключа
+    'emailActivation' => true,                  //активация пользователя по email
 ];

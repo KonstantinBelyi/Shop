@@ -28,19 +28,19 @@ class ResetPassword extends Model
         ];
     }
 
-    //создает форму модели данного токена.
-    public function __construct($token, $config = [])
+    //создает форму модели данного ключа.
+    public function __construct($key, $config = [])
     {
-        if (empty($token) || !is_string($token))
+        if (empty($key) || !is_string($key))
         {
-            throw new InvalidParamException('Токен сброса пароля не может быть пустым.');
+            throw new InvalidParamException('Ключ сброса пароля не может быть пустым.');
         }
 
-        $this->_user = User::findByPasswordResetToken($token);
+        $this->_user = User::findBySecretKey($key);
 
         if (!$this->_user)
         {
-            throw new InvalidParamException('Неправильный токен сброса пароля.');
+            throw new InvalidParamException('Неправильный ключ сброса пароля.');
         }
 
         parent::__construct($config);
@@ -51,7 +51,7 @@ class ResetPassword extends Model
     {
         $user = $this->_user;
         $user->setPassword($this->password);
-        $user->removePasswordResetToken();
+        $user->removeSecretKey();
 
         return $user->save(false);
     }

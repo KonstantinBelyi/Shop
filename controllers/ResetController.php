@@ -3,13 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-use yii\web\Controller;
 use app\models\RequestPasswordReset;
 use app\models\ResetPassword;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 
-class ResetController extends Controller
+class ResetController extends AppController
 {
     //запрос сброса пароля
     public function actionRequestPasswordReset()
@@ -36,11 +35,11 @@ class ResetController extends Controller
     }
 
     //сброс старого пароля и сохранение нового пароля
-    public function actionResetPassword($token)
+    public function actionResetPassword($key)
     {
         try
         {
-            $model_reset = new ResetPassword($token);
+            $model_reset = new ResetPassword($key);
         }
         catch (InvalidParamException $e)
         {
