@@ -1,18 +1,56 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Konstantin
- * Date: 09.02.2017
- * Time: 21:19
- */
 
 namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 class AppController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post', 'get'],
+                ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+//            'captcha' => [
+//                'class' => 'yii\captcha\CaptchaAction',
+//                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+//            ],
+        ];
+    }
+
     //установка метатегов
     protected function setMeta($title = null, $keywords = null, $description = null)
     {

@@ -4,8 +4,6 @@ namespace app\controllers;
 
 use app\models\User;
 use Yii;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use app\models\Login;
 use app\models\Signup;
 use app\models\AccountActivation;
@@ -16,48 +14,6 @@ use yii\web\BadRequestHttpException;
 
 class SiteController extends AppController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post', 'get'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     //регистрация пользователя
     public function actionSignup()
     {
@@ -99,6 +55,7 @@ class SiteController extends AppController
         return $this->render('signup', compact('model_signup'));
     }
 
+    //активация аккаунта
     public function actionActivateAccount($key)
     {
         try

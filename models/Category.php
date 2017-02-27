@@ -45,16 +45,16 @@ class Category extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'parent_id' => 'Parent ID',
-            'name' => 'Name',
-            'keywords' => 'Keywords',
-            'description' => 'Description',
-        ];
-    }
+//    public function attributeLabels()
+//    {
+//        return [
+//            'id' => 'ID',
+//            'parent_id' => 'Parent ID',
+//            'name' => 'Name',
+//            'keywords' => 'Keywords',
+//            'description' => 'Description',
+//        ];
+//    }
 
     public function getProduct()
     {

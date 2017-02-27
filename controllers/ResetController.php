@@ -7,6 +7,7 @@ use app\models\RequestPasswordReset;
 use app\models\ResetPassword;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
+use yii\helpers\Url;
 
 class ResetController extends AppController
 {
@@ -48,9 +49,9 @@ class ResetController extends AppController
 
         if ($model_reset->load(Yii::$app->request->post()) && $model_reset->validate() && $model_reset->resetPassword())
         {
-            //Yii::$app->session->setFlash('success', 'Новый пароль был сохранен.');
+            Yii::$app->session->setFlash('success', 'Новый пароль был сохранен.');
 
-            return $this->goHome();
+            return $this->redirect(Url::to(['site/login']));
         }
 
         return $this->render('resetPassword', compact('model_reset'));

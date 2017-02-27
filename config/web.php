@@ -24,7 +24,7 @@ $config = [
             //'loginUrl' => 'cart',
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => '/site/error',
         ],
 
         'log' => [
@@ -50,6 +50,7 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main_admin',
+            'defaultRoute' => 'orders/index',
         ],
     ],
 

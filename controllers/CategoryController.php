@@ -77,7 +77,7 @@ class CategoryController extends AppController
         $this->setMeta('SHOP | Поиск: ' . $quest);
 
         if (!$quest)
-            return $this->render('search', compact('q'));
+            return $this->render('search', compact('quest'));
 
         $query = Product::find()
             ->where(['like', 'name', $quest]);

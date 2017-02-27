@@ -52,24 +52,24 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'category_id' => 'Category ID',
-            'name' => 'Name',
-            'content' => 'Content',
-            'price' => 'Price',
-            'keywords' => 'Keywords',
-            'description' => 'Description',
-            'img' => 'Img',
-            'hit' => 'Hit',
-            'recommend' => 'Recommend',
-            'new' => 'New',
-            'sale' => 'Sale',
-            'exist' => 'Exist',
-        ];
-    }
+//    public function attributeLabels()
+//    {
+//        return [
+//            'id' => 'ID',
+//            'category_id' => 'Category ID',
+//            'name' => 'Name',
+//            'content' => 'Content',
+//            'price' => 'Price',
+//            'keywords' => 'Keywords',
+//            'description' => 'Description',
+//            'img' => 'Img',
+//            'hit' => 'Hit',
+//            'recommend' => 'Recommend',
+//            'new' => 'New',
+//            'sale' => 'Sale',
+//            'exist' => 'Exist',
+//        ];
+//    }
 
     /**
      * @return \yii\db\ActiveQuery

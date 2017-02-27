@@ -11,6 +11,7 @@ use yii\bootstrap\Modal;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\LtIeAppAsset;
+use app\components\AlertWidget;
 //use app\components\MenuCategoryWidget;
 
 AppAsset::register($this);
@@ -123,6 +124,9 @@ LtIeAppAsset::register($this);
 
 </header><!--/header-->
 
+<div class="container">
+    <?= AlertWidget::widget(); ?>
+</div>
 <?= $content; ?>
 
 <footer id="footer"><!--Footer-->

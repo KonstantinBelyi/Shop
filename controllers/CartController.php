@@ -97,7 +97,7 @@ class CartController extends AppController
 
                 OrderItems::saveOrderItems($session['cart'], $model_order->id);
 
-                Yii::$app->session->setFlash('success', 'Ваш заказ принят.');
+                Yii::$app->session->setFlash('success', 'Ваш заказ принят. Проверте вашу почту.');
 
                 $model_order->sendMail('send-user', $session, $model_order->email);
 
