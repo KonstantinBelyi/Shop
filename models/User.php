@@ -15,7 +15,7 @@ use yii\db\Expression;
  * @property string $username
  * @property string $email
  * @property string $password_hash
- * @property string $password_secret_key
+ * @property string $password_reset_token
  * @property string $auth_key
  * @property string $status
  * @property string $created_at
@@ -117,7 +117,7 @@ class User extends ActiveRecord implements IdentityInterface
     //создает новый секретный ключ
     public function generateSecretKey()
     {
-        $this->password_secret_key = Yii::$app->security->generateRandomString() . '_' . time();
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
     //находит пользователя с помощью секретного ключа
@@ -127,12 +127,12 @@ class User extends ActiveRecord implements IdentityInterface
             return null;
         }
 
-        return static::findOne(['password_secret_key' => $key]);
+        return static::findOne(['password_reset_token' => $key]);
     }
 
     //удаляет секретный ключ
     public function removeSecretKey()
     {
-        $this->password_secret_key = null;
+        $this->password_reset_token = null;
     }
 }

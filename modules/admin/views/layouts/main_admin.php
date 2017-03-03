@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AdminAppAsset;
+use mdm\admin\components\Helper;
 
 AdminAppAsset::register($this);
 ?>
@@ -26,8 +27,15 @@ AdminAppAsset::register($this);
 
 <div class="wrap">
     <?php
+
+    $menu_items = [
+        ['label' => 'Главная', 'url' => ['/admin/default/index']],
+        ['label' => 'Заказы', 'url' => ['/admin/orders/index']],
+        ['label' => 'Пользователи', 'url' => ['/rbac/default/index']],
+    ];
+
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'В магазин',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse',
@@ -35,16 +43,7 @@ AdminAppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                ['label' => 'Выйти (' . Yii::$app->user->identity['username'] . ')', 'url' => ['/site/logout']]
-            )
-        ],
+        'items' => Helper::filter($menu_items),
     ]);
     NavBar::end();
     ?>

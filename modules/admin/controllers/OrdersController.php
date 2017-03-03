@@ -6,28 +6,13 @@ use Yii;
 use app\modules\admin\models\Orders;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
  */
 class OrdersController extends AppAdminController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Orders models.
      * @return mixed

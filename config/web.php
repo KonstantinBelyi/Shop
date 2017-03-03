@@ -18,10 +18,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+//        'user' => [
+//            'identityClass' => 'app\models\User',
+//            'enableAutoLogin' => true,
+//            //'loginUrl' => 'cart',
+//        ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-            //'loginUrl' => 'cart',
+            'loginUrl' => ['site/login'],
         ],
         'errorHandler' => [
             'errorAction' => '/site/error',
@@ -44,15 +48,46 @@ $config = [
         'urlManager' => require (__DIR__ . '/urlManager.php'),
 
         //'view' => require (__DIR__ . '/theme.php'),
+
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
 
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main_admin',
-            'defaultRoute' => 'orders/index',
+            //'defaultRoute' => 'orders/index',
+        ],
+        'rbac' => [
+            'class' => 'mdm\admin\Module',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    /* 'userClassName' => 'app\models\User', */
+                    'idField' => 'id',
+                    'usernameField' => 'username',
+                ],
+            ],
+            'layout' => 'left-menu',
+            'mainLayout' => '@app/modules/admin/views/layouts/main_admin.php',
         ],
     ],
+
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'category/*',
+            'cart/*',
+            'product/*',
+            'reset/*',
+//            'admin/*',
+//            'rbac/*',
+        ]
+    ],
+
 
 ];
 

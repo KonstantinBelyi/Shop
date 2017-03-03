@@ -44,7 +44,7 @@ class RequestPasswordReset extends Model
             return false;
         }
 
-        if (!User::isSecretKeyValid($user->password_secret_key))
+        if (!User::isSecretKeyValid($user->password_reset_token))
         {
             $user->generateSecretKey();
             if (!$user->save())
