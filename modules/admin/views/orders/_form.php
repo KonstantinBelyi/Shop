@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datetimepicker\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Orders */
@@ -14,7 +15,22 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?php //$form->field($model, 'updated_at')->textInput() ?>
+
+    <?= $form->field($model, 'updated_at')->widget(
+        DateTimePicker::className(), [
+        'language' => 'ru',
+        'size' => 'ms',
+        'template' => '{input}',
+        'inline' => false,
+        'clientOptions' => [
+            'autoclose' => true,
+            //'linkFormat' => 'HH:ii P', // if inline = true
+            'format' => 'yyyy-mm-dd HH:ii:ss', // if inline = false
+            'todayBtn' => true,
+        ]
+    ]);
+    ?>
 
     <?= $form->field($model, 'qty')->textInput() ?>
 

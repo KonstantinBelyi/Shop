@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\modules\admin\models;
 
 use Yii;
 
@@ -46,6 +46,28 @@ class Product extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID товара',
+            'category_id' => 'Категория',
+            'name' => 'Название',
+            'content' => 'Описание',
+            'price' => 'Цена',
+            'keywords' => 'Ключевые слова',
+            'description' => 'Мета-описание',
+            'img' => 'Фото',
+            'hit' => 'Популярность',
+            'recommend' => 'Предложение',
+            'new' => 'Новинка',
+            'sale' => 'Распродажа',
+            'exist' => 'Статус',
         ];
     }
 

@@ -47,7 +47,7 @@ class Category extends \yii\db\ActiveRecord
             'parent_id' => 'Родительская категория',
             'name' => 'Название',
             'keywords' => 'Ключевые слова',
-            'description' => 'Описание',
+            'description' => 'Мета-описание',
         ];
     }
 

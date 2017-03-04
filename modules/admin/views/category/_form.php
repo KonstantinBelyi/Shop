@@ -18,7 +18,7 @@ use app\components\MenuCategoryWidget;
         <select id="category-parent_id" class="form-control" name="Category[parent_id]">
 
             <option value="0">Самостоятельная</option>
-            <?= MenuCategoryWidget::widget(['template' => 'select', 'model' => $model])?>
+            <?= MenuCategoryWidget::widget(['template' => 'select_category', 'model' => $model])?>
 
         </select>
     </div>
