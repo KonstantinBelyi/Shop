@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AdminAppAsset;
 use mdm\admin\components\Helper;
+use app\components\AlertWidget;
 
 AdminAppAsset::register($this);
 ?>
@@ -31,7 +32,7 @@ AdminAppAsset::register($this);
     $menu_items = [
         ['label' => 'Главная', 'url' => ['/admin/default/index']],
         ['label' => 'Заказы', 'url' => ['/admin/orders/index']],
-        ['label' => 'Пользователи', 'url' => ['/rbac/default/index']],
+        ['label' => 'RBAC', 'url' => ['/rbac/default/index']],
     ];
 
     NavBar::begin([
@@ -52,6 +53,7 @@ AdminAppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <?= AlertWidget::widget()?>
         <?= $content ?>
     </div>
 </div>

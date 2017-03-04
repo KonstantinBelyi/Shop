@@ -37,8 +37,8 @@ LtIeAppAsset::register($this);
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> +38 093 000 11 22</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> zinchenko.us@gmail.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> +38 -- --- -- --</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> E-shop@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ LtIeAppAsset::register($this);
                     <div class="social-icons pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vk"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -70,11 +70,11 @@ LtIeAppAsset::register($this);
                             <?php if (Yii::$app->user->isGuest): ?>
 
                                 <li><a href="<?= Url::to(['site/signup'])?>"><i class="fa fa-user"></i> Регистрация</a></li>
-                                <li><a href="<?= Url::to(['site/login'])?>"><i class="fa fa-lock"></i> Вход</a></li>
+                                <li><a href="<?= Url::to(['site/login'])?>"><i class="fa fa-share"></i> Вход</a></li>
 
                             <?php else: ?>
 
-                                <li><a href="<?= Url::to(['site/logout'])?>"><i class="fa fa-lock"></i> Выход (<?= Yii::$app->user->identity['username']?>)</a></li>
+                                <li><a href="<?= Url::to(['site/logout'])?>"><i class="fa fa-sign-out"></i> Выход (<?= Yii::$app->user->identity['username']?>)</a></li>
 
                             <?php endif; ?>
                         </ul>

@@ -15,6 +15,7 @@ use app\models\Category;
 class MenuCategoryWidget extends Widget
 {
     public $template;
+    public $model;
     public $data;
     public $tree;
     public $menuHtml;
@@ -34,16 +35,20 @@ class MenuCategoryWidget extends Widget
     public function run()
     {
         //get cache
-        $cacheMenu = Yii::$app->cache->get('menu');
-        if ($cacheMenu)
-            return $cacheMenu;
+        if ($this->template == 'menu.php')
+        {
+            $cacheMenu = Yii::$app->cache->get('menu');
+            if ($cacheMenu)
+                return $cacheMenu;
+        }
 
         $this->data = Category::find()->indexBy('id')->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
         //set cache
-        Yii::$app->cache->set('menu', $this->menuHtml, $this->set_second_cache);
+        if ($this->template == 'menu.php')
+            Yii::$app->cache->set('menu', $this->menuHtml, $this->set_second_cache);
 
         return $this->menuHtml;
     }
@@ -63,18 +68,18 @@ class MenuCategoryWidget extends Widget
         return $tree;
     }
 
-    protected function getMenuHtml($tree)
+    protected function getMenuHtml($tree, $tab = '')
     {
         $str = '';
         foreach ($tree as $category)
         {
-            $str .= $this->toTemplate($category);
+            $str .= $this->toTemplate($category, $tab);
         }
 
         return $str;
     }
 
-    protected function toTemplate($category)
+    protected function toTemplate($category, $tab)
     {
         ob_start();
         include __DIR__ . '/template_menu/' . $this->template;

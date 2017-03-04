@@ -10,23 +10,23 @@ $config = [
     'params' => $params,
     'defaultRoute' => 'category/index',
     'components' => [
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'olXq0SM-LotdSvQblJe25MQzMVTYfNaD',
             'baseUrl' => '',
         ],
+
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-//        'user' => [
-//            'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => true,
-//            //'loginUrl' => 'cart',
-//        ],
+
         'user' => [
             'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
             'loginUrl' => ['site/login'],
         ],
+
         'errorHandler' => [
             'errorAction' => '/site/error',
         ],
@@ -83,7 +83,9 @@ $config = [
             'cart/*',
             'product/*',
             'reset/*',
-//            'admin/*',
+            'gii/*',
+            'debug/*',
+            'admin/*',
 //            'rbac/*',
         ]
     ],

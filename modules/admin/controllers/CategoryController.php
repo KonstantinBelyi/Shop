@@ -3,32 +3,24 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\Orders;
+use app\modules\admin\models\Category;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
-
 /**
- * OrdersController implements the CRUD actions for Orders model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class OrdersController extends AppAdminController
+class CategoryController extends AppAdminController
 {
+
     /**
-     * Lists all Orders models.
+     * Lists all Category models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Orders::find(),
-            'pagination' => [
-                'pageSize' => 10
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'status' => SORT_ASC,
-                ],
-            ],
+            'query' => Category::find()->with('category'),
         ]);
 
         return $this->render('index', [
@@ -37,7 +29,7 @@ class OrdersController extends AppAdminController
     }
 
     /**
-     * Displays a single Orders model.
+     * Displays a single Category model.
      * @param string $id
      * @return mixed
      */
@@ -49,15 +41,18 @@ class OrdersController extends AppAdminController
     }
 
     /**
-     * Creates a new Orders model.
+     * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Orders();
+        $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            Yii::$app->session->setFlash('success', "Категория {$model->name} успешно создана.");
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -67,7 +62,7 @@ class OrdersController extends AppAdminController
     }
 
     /**
-     * Updates an existing Orders model.
+     * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -78,7 +73,7 @@ class OrdersController extends AppAdminController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            Yii::$app->session->setFlash('info', "Заказ № {$model->id} успешно обновлен.");
+            Yii::$app->session->setFlash('info', "Категория {$model->name} успешно обновлена.");
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -89,7 +84,7 @@ class OrdersController extends AppAdminController
     }
 
     /**
-     * Deletes an existing Orders model.
+     * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -98,7 +93,7 @@ class OrdersController extends AppAdminController
     {
         $model = $this->findModel($id);
 
-        Yii::$app->session->setFlash('danger', "Заказ № {$model->id} удален.");
+        Yii::$app->session->setFlash('danger', "Категория {$model->name} удалена.");
 
         $model->delete();
 
@@ -106,15 +101,15 @@ class OrdersController extends AppAdminController
     }
 
     /**
-     * Finds the Orders model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Orders the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Orders::findOne($id)) !== null) {
+        if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
