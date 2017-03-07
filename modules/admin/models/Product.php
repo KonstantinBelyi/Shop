@@ -3,6 +3,8 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "product".
@@ -24,14 +26,27 @@ use Yii;
  * @property OrderItems[] $orderItems
  * @property Category $category
  */
-class Product extends \yii\db\ActiveRecord
+class Product extends ActiveRecord
 {
+
+    public $image;
+    public $gallery;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'product';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
     }
 
     /**
@@ -46,6 +61,8 @@ class Product extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['image'], 'file', 'extensions' => 'png, jpg'],
+            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
 
@@ -62,7 +79,8 @@ class Product extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'keywords' => 'Ключевые слова',
             'description' => 'Мета-описание',
-            'img' => 'Фото',
+            'image' => 'Фото',
+            'gallery' => 'Галерея',
             'hit' => 'Популярность',
             'recommend' => 'Предложение',
             'new' => 'Новинка',
@@ -85,5 +103,42 @@ class Product extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function upload()
+    {
+        if ($this->validate())
+        {
+            $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            $this->attachImage($path, true);
+            unlink($path);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function uploadGallery()
+    {
+        if ($this->validate())
+        {
+            foreach ($this->gallery as $file)
+            {
+                $path = 'upload/store/' . $file->baseName . '.' . $file->extension;
+                $file->saveAs($path);
+                $this->attachImage($path);
+                unlink($path);
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

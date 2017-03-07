@@ -10,6 +10,10 @@ use yii\helpers\Url;
 use app\components\MenuCategoryWidget;
 ?>
 
+<?php
+    $mainImg = $product->getImage();
+?>
+
 <section>
     <div class="container">
         <div class="row">
@@ -31,7 +35,8 @@ use app\components\MenuCategoryWidget;
 
                             <div class="view-product">
 
-                                <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]) ?>
+                                <?php //Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]) ?>
+                                <?= Html::img($mainImg->getUrl(), ['alt' => $product->name]) ?>
 
                             </div>
 

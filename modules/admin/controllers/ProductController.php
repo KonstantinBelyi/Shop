@@ -6,6 +6,7 @@ use Yii;
 use app\modules\admin\models\Product;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -74,6 +75,18 @@ class ProductController extends AppAdminController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->image = UploadedFile::getInstance($model, 'image');
+
+            if ($model->image)
+            {
+                $model->upload();
+            }
+            unset($model->image);
+
+            $model->gallery = UploadedFile::getInstances($model, 'gallery');
+
+            $model->uploadGallery();
 
             Yii::$app->session->setFlash('info', "Товар {$model->name} успешно обновлен.");
 

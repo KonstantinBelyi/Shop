@@ -1,12 +1,8 @@
-<div class="admin-default-index container">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<div class="admin-default-index container text-center">
+    <h1>Добро пожаловать в админ панель!</h1>
+    <h2>Добро пожаловать в админ панель!</h2>
+    <h3>Добро пожаловать в админ панель!</h3>
+    <h4>Добро пожаловать в админ панель!</h4>
+    <h5>Добро пожаловать в админ панель!</h5>
+    <h6>Добро пожаловать в админ панель!</h6>
 </div>

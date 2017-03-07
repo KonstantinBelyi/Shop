@@ -32,6 +32,8 @@ AdminAppAsset::register($this);
     $menu_items = [
         ['label' => 'Главная', 'url' => ['/admin/default/index']],
         ['label' => 'Заказы', 'url' => ['/admin/orders/index']],
+        ['label' => 'Товары', 'url' => ['/admin/product/index']],
+        ['label' => 'Категории', 'url' => ['/admin/category/index']],
         ['label' => 'RBAC', 'url' => ['/rbac/default/index']],
     ];
 
