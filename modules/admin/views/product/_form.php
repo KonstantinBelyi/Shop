@@ -12,7 +12,7 @@ use mihaildev\ckeditor\CKEditor;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(); //['options' => ['enctype' => 'multipart/form-data']]?>
 
     <div class="form-group field-product-category_id">
         <label class="control-label" for="product-category_id">Категория</label>
@@ -40,9 +40,11 @@ use mihaildev\ckeditor\CKEditor;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->fileInput() ?>
+    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+<!--    --><?php //$form->field($model, 'image')->fileInput() ?>
+<!---->
+<!--    --><?php //$form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?= $form->field($model, 'hit')->checkbox(['0', '1'], false) ?>
 

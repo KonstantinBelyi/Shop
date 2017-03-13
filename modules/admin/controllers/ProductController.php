@@ -76,17 +76,17 @@ class ProductController extends AppAdminController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            $model->image = UploadedFile::getInstance($model, 'image');
-
-            if ($model->image)
-            {
-                $model->upload();
-            }
-            unset($model->image);
-
-            $model->gallery = UploadedFile::getInstances($model, 'gallery');
-
-            $model->uploadGallery();
+//            $model->image = UploadedFile::getInstance($model, 'image');
+//
+//            if ($model->image)
+//            {
+//                $model->upload();
+//            }
+//            unset($model->image);
+//
+//            $model->gallery = UploadedFile::getInstances($model, 'gallery');
+//
+//            $model->uploadGallery();
 
             Yii::$app->session->setFlash('info', "Товар {$model->name} успешно обновлен.");
 
