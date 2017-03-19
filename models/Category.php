@@ -30,6 +30,14 @@ class Category extends ActiveRecord
         return 'category';
     }
 
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
 
     /**
      * @inheritdoc

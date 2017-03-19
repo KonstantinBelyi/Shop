@@ -24,6 +24,11 @@ use app\components\MenuCategoryWidget;
                 </div>
             </div>
 
+            <?php
+                $mainImg = $product->getImage();
+                $gallery = $product->getImages();
+            ?>
+
             <div class="col-sm-9 padding-right">
                 <div class="product-details"><!--product-details-->
                     <div class="row">
@@ -31,9 +36,43 @@ use app\components\MenuCategoryWidget;
 
                             <div class="view-product">
 
-                                <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]) ?>
+                                <?= Html::img($mainImg->getUrl(), ['alt' => $product->name]) ?>
 
                             </div>
+
+                            <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+
+                                    <?php
+                                    $count = count($gallery);
+                                    $i = 0;
+                                    foreach ($gallery as $img): ?>
+
+                                        <?php if ($i % 3 == 0): ?>
+                                            <div class="item <?php if ($i == 0) echo ' active' ?>">
+                                        <?php endif; ?>
+
+                                            <a href=""><?= Html::img($img->getUrl('84x85'), ['alt' => '']) ?></a>
+
+                                        <?php $i++; if ($i % 3 == 0 || $i == $count): ?>
+                                            </div>
+                                        <?php endif; ?>
+
+                                    <?php endforeach; ?>
+
+                                </div>
+
+                                <!-- Controls -->
+                                <a class="left item-control" href="#similar-product" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a class="right item-control" href="#similar-product" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+
 
                         </div>
                         <div class="col-sm-7">

@@ -30,14 +30,18 @@ use \app\components\MenuCategoryWidget;
 
                         <?php $i = 0; foreach ($hit as $value):?>
 
+                            <?php
+                                $hitImg = $value->getImage();
+                            ?>
+
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
 
-                                            <?= Html::img("@web/images/products/{$value->img}", ['alt' => $value->name]) ?>
+                                            <?= Html::img($hitImg->getUrl(), ['alt' => $value->name]) ?>
 
-                                            <h2>$<?= $value->price; ?></h2>
+                                            <h2><?= $value->price; ?>$</h2>
 
                                             <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
@@ -78,6 +82,10 @@ use \app\components\MenuCategoryWidget;
                                 $i = 0;
                                 foreach ($recommend as $value): ?>
 
+                                <?php
+                                    $recommendImg = $value->getImage();
+                                ?>
+
                                 <?php if ($i % 3 == 0): ?>
                                     <div class="item <?php if ($i == 0) echo 'active' ?>">
                                 <?php endif; ?>
@@ -87,9 +95,9 @@ use \app\components\MenuCategoryWidget;
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
 
-                                                    <?= Html::img("@web/images/products/{$value->img}", ['alt' => $value->name]) ?>
+                                                    <?= Html::img($recommendImg->getUrl(), ['alt' => $value->name]) ?>
 
-                                                    <h2>$<?= $value->price; ?></h2>
+                                                    <h2><?= $value->price; ?>$</h2>
 
                                                     <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
