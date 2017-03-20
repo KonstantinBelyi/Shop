@@ -16,7 +16,6 @@ use \yii\db\ActiveRecord;
  * @property double $price
  * @property string $keywords
  * @property string $description
- * @property string $img
  * @property string $hit
  * @property string $recommend
  * @property string $new
@@ -59,7 +58,7 @@ class Product extends ActiveRecord
             [['category_id'], 'integer'],
             [['content', 'hit', 'recommend', 'new', 'sale', 'exist'], 'string'],
             [['price'], 'number'],
-            [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
+            [['name', 'keywords', 'description'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['image'], 'file', 'extensions' => 'png, jpg'],
             [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
@@ -79,8 +78,8 @@ class Product extends ActiveRecord
             'price' => 'Цена',
             'keywords' => 'Ключевые слова',
             'description' => 'Мета-описание',
-            'image' => 'Фото',
-            'gallery' => 'Галерея (можно загрузить форматы только png и jpg, максимальное количество 4 фото)',
+            'image' => 'Основное Фото',
+            'gallery' => 'Галерея',
             //'img' => 'Фото',
             'hit' => 'Популярность',
             'recommend' => 'Предложение',

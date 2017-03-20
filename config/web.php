@@ -91,8 +91,8 @@ $config = [
             'access' => ['@'],
             'root' => [
                 'baseUrl'=>'/web',
-                'path' => 'upload/global',
-                'name' => 'Global'
+                'path' => 'upload',
+                'name' => 'Upload'
             ],
         ]
     ],

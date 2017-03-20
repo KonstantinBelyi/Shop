@@ -34,6 +34,7 @@ AdminAppAsset::register($this);
         ['label' => 'Заказы', 'url' => ['/admin/orders/index']],
         ['label' => 'Товары', 'url' => ['/admin/product/index']],
         ['label' => 'Категории', 'url' => ['/admin/category/index']],
+        ['label' => 'Файловый менеджер', 'url' => ['/elfinder/manager'], 'linkOptions' => ['target' => '_blank']],
         ['label' => 'RBAC', 'url' => ['/rbac/default/index']],
     ];
 

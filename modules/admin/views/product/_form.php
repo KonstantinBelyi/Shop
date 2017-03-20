@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 use app\components\MenuCategoryWidget;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\InputFile;
+use yii\web\JsExpression;
 mihaildev\elfinder\Assets::noConflict($this);
 
 /* @var $this yii\web\View */
@@ -39,9 +41,30 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
+    <div style="color:#999;">
+        <i>*Можно загрузить форматы только png и jpg, максимальное количество 4 фото.</i>
+    </div>
+
+    <?php
+        $mainImg = $model->getImage();
+        $galleryImg = $model->getImages();
+    ?>
+
     <?= $form->field($model, 'image')->fileInput() ?>
 
+    <div class="container" style="margin: 15px 0">
+        <?= Html::img($mainImg->getUrl('100x100'), ['alt' => '']) ?>
+    </div>
+
     <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+
+    <div class="container" style="margin: 15px 0">
+        <?php foreach ($galleryImg as $img): ?>
+
+            <?= Html::img($img->getUrl('100x100'), ['alt' => '']) ?>
+
+        <?php endforeach; ?>
+    </div>
 
     <?= $form->field($model, 'hit')->checkbox(['0', '1'], false) ?>
 
