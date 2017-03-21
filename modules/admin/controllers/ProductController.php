@@ -91,7 +91,9 @@ class ProductController extends AppAdminController
             Yii::$app->session->setFlash('info', "Товар {$model->name} успешно обновлен.");
 
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        }
+        else
+        {
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -129,5 +131,26 @@ class ProductController extends AppAdminController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    //удаление основного фото
+    public function actionRemove($id)
+    {
+        $model = $this->findModel($id);
+
+        $img = $model->getImage();
+        $model->removeImage($img);
+
+        return $this->redirect(['update', 'id' => $model->id]);
+    }
+
+    //удаление всех фотографий
+    public function actionRemoveGallery($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->removeImages();
+
+        return $this->redirect(['update', 'id' => $model->id]);
     }
 }

@@ -5,8 +5,7 @@ use yii\widgets\ActiveForm;
 use app\components\MenuCategoryWidget;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
-use mihaildev\elfinder\InputFile;
-use yii\web\JsExpression;
+
 mihaildev\elfinder\Assets::noConflict($this);
 
 /* @var $this yii\web\View */
@@ -42,7 +41,7 @@ mihaildev\elfinder\Assets::noConflict($this);
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
     <div style="color:#999;">
-        <i>*Можно загрузить форматы только png и jpg, максимальное количество 4 фото.</i>
+        <i>*Можно загрузить форматы только png и jpg.</i>
     </div>
 
     <?php
@@ -53,7 +52,21 @@ mihaildev\elfinder\Assets::noConflict($this);
     <?= $form->field($model, 'image')->fileInput() ?>
 
     <div class="container" style="margin: 15px 0">
+
         <?= Html::img($mainImg->getUrl('100x100'), ['alt' => '']) ?>
+
+    </div>
+
+    <?= Html::a('Удалить основное фото', ['remove', 'id' => $model->id], [
+        'class' => 'btn btn-xs btn-danger',
+        'data' => [
+            'confirm' => 'Вы уверены, что хотите удалить основное фото?',
+            'method' => 'post',
+        ],
+    ]) ?>
+
+    <div style="color:#999;">
+        <i>*Максимальное количество 4 фото.</i>
     </div>
 
     <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
@@ -65,6 +78,14 @@ mihaildev\elfinder\Assets::noConflict($this);
 
         <?php endforeach; ?>
     </div>
+
+    <?= Html::a('Удалить все фотографии', ['remove-gallery', 'id' => $model->id], [
+        'class' => 'btn btn-xs btn-danger',
+        'data' => [
+            'confirm' => 'Вы уверены, что хотите удалить ВСЕ фотографии?',
+            'method' => 'post',
+        ],
+    ]) ?>
 
     <?= $form->field($model, 'hit')->checkbox(['0', '1'], false) ?>
 
