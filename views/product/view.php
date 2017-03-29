@@ -36,7 +36,7 @@ use app\components\MenuCategoryWidget;
 
                             <div class="view-product">
 
-                                <?= Html::img($mainImg->getUrl(), ['alt' => $product->name]) ?>
+                                <?= Html::img($mainImg->getUrl('255x255'), ['alt' => $product->name]) ?>
 
                             </div>
 

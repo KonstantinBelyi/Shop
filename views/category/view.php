@@ -42,13 +42,17 @@ use yii\widgets\LinkPager;
                                         <div class="single-products">
                                             <div class="productinfo text-center">
 
-                                                <?= Html::img($productsImg->getUrl(), ['alt' => $value->name]) ?>
+                                                <?= Html::img($productsImg->getUrl('255x255'), ['alt' => $value->name]) ?>
 
                                                 <h2>$<?= $value->price; ?></h2>
 
                                                 <p><a href="<?= Url::to(['product/view', 'id' => $value->id])?>" ><?= $value->name; ?></a></p>
 
-                                                <a href="#" data-id = "<?= $value->id; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                                <a href="#" data-id = "<?= $value->id; ?>"
+                                                   class="btn btn-default add-to-cart">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    В корзину
+                                                </a>
 
                                             </div>
 

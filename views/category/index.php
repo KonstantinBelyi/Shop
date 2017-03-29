@@ -39,7 +39,7 @@ use \app\components\MenuCategoryWidget;
                                     <div class="single-products">
                                         <div class="productinfo text-center">
 
-                                            <?= Html::img($hitImg->getUrl(), ['alt' => $value->name]) ?>
+                                            <?= Html::img($hitImg->getUrl('255x255'), ['alt' => $value->name]) ?>
 
                                             <h2><?= $value->price; ?>$</h2>
 
@@ -95,7 +95,7 @@ use \app\components\MenuCategoryWidget;
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
 
-                                                    <?= Html::img($recommendImg->getUrl(), ['alt' => $value->name]) ?>
+                                                    <?= Html::img($recommendImg->getUrl('255x255'), ['alt' => $value->name]) ?>
 
                                                     <h2><?= $value->price; ?>$</h2>
 

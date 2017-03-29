@@ -35,7 +35,7 @@ class AppAsset extends AssetBundle
         'js/price-range.js',
         'js/jquery.prettyPhoto.js',
         'js/jquery.cookie.js',
-        'js/jquery.accordion.min.js',
+        //'js/jquery.accordion.min.js',  //при вкл раскомментировать в main.js строчку 69
         'js/jquery.hoverIntent.minified.js',
         'js/main.js',
     ];

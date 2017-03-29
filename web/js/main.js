@@ -66,9 +66,9 @@ $(document).ready(function(){
 		});
 	});
 
-	$('.catalog').dcAccordion({
-		speed:'fast'
-	});
+	// $('.catalog').dcAccordion({
+	// 	speed:'fast'
+	// });
 
 	$('#cart .modal-body').on('click', '.del-item', function () {
 		var id = $(this).data('id');
